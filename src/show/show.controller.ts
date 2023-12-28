@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Param, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  HttpStatus,
+  Query,
+} from '@nestjs/common';
 import { ShowService } from './show.service';
 import { CreateShowDto } from './dtos/create-show.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { FindAllShowDto } from './dtos/find-all-show.dto';
 
 @ApiTags('공연 정보')
 @Controller('shows')
@@ -29,8 +38,14 @@ export class ShowController {
    * @returns
    */
   @Get()
-  findAll() {
-    return this.showService.findAll();
+  async findAll(@Query() findAllShowDto: FindAllShowDto) {
+    const data = await this.showService.findAll(findAllShowDto);
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: '공연 목록 조회에 성공했습니다.',
+      data,
+    };
   }
 
   /**
@@ -39,7 +54,13 @@ export class ShowController {
    * @returns
    */
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.showService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    const data = await this.showService.findOne(id);
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: '공연 상세 조회에 성공했습니다.',
+      data,
+    };
   }
 }
