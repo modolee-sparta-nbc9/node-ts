@@ -27,7 +27,7 @@ export class ShowController {
    * @returns
    */
   @ApiBearerAuth()
-  @Roles(UserRole.Customer)
+  @Roles(UserRole.Admin)
   @UseGuards(RolesGuard)
   @Post()
   async create(@Body() createShowDto: CreateShowDto): Promise<{
