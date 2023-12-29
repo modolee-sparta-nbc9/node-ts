@@ -1,6 +1,6 @@
 import {
-  IsBoolean,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -15,6 +15,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserRole } from '../types/user-role.type';
 
 @Entity('users')
 export class User {
@@ -58,9 +59,9 @@ export class User {
   @Column({ unsigned: true })
   points: number;
 
-  @IsBoolean()
-  @Column({ default: false })
-  isAdmin: boolean;
+  @IsEnum(UserRole)
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.Customer })
+  role: UserRole;
 
   @CreateDateColumn()
   createdAt: Date;

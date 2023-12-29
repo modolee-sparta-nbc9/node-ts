@@ -6,11 +6,15 @@ import {
   Param,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ShowService } from './show.service';
 import { CreateShowDto } from './dtos/create-show.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { FindAllShowDto } from './dtos/find-all-show.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { UserRole } from 'src/user/types/user-role.type';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @ApiTags('공연 정보')
 @Controller('shows')
@@ -22,8 +26,27 @@ export class ShowController {
    * @param createShowDto
    * @returns
    */
+  @ApiBearerAuth()
+  @Roles(UserRole.Customer)
+  @UseGuards(RolesGuard)
   @Post()
-  async create(@Body() createShowDto: CreateShowDto) {
+  async create(@Body() createShowDto: CreateShowDto): Promise<{
+    statusCode: HttpStatus;
+    message: string;
+    data: {
+      schedules: {
+        seat: { availableSeats: number; totalSeats: number };
+        date: Date;
+        time: string;
+      }[];
+      title: string;
+      description: string;
+      category: import('/Users/modolee/Dev/sparta/nbc9/commentary/sparta-node-ts/src/show/types/show-category.type').ShowCategory;
+      place: string;
+      price: number;
+      thumbnail: string;
+    } & import('/Users/modolee/Dev/sparta/nbc9/commentary/sparta-node-ts/src/show/entities/show.entity').Show;
+  }> {
     const data = await this.showService.create(createShowDto);
 
     return {
