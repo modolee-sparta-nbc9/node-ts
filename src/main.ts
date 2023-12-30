@@ -10,7 +10,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get<number>('SERVER_PORT');
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', { exclude: ['/health-check'] });
 
   app.useGlobalPipes(
     new ValidationPipe({

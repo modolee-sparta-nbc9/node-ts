@@ -1,14 +1,18 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBookDto } from './dtos/create-book.dto';
 import { Book } from './entities/book.entity';
-import { DataSource } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { Seat } from 'src/show/entities/seat.entity';
 import { Schedule } from 'src/show/entities/schedule.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class BookService {
-  constructor(private readonly dataSource: DataSource) {}
+  constructor(
+    private readonly dataSource: DataSource,
+    @InjectRepository(Book) private readonly bookRepository: Repository<Book>,
+  ) {}
 
   async create(userId: number, { scheduleId }: CreateBookDto) {
     const queryRunner = this.dataSource.createQueryRunner();
@@ -57,11 +61,33 @@ export class BookService {
     }
   }
 
-  async findAll() {
-    return `This action returns all book`;
+  async findAll(userId: number) {
+    const books = await this.bookRepository.find({
+      where: { userId },
+      relations: {
+        schedule: {
+          show: true,
+        },
+      },
+    });
+
+    return books;
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} book`;
+  async findOne(id: number, userId: number) {
+    const book = await this.bookRepository.findOne({
+      where: { id, userId },
+      relations: {
+        schedule: {
+          show: true,
+        },
+      },
+    });
+
+    if (!book) {
+      throw new NotFoundException('예매 정보를 찾을 수 없습니다.');
+    }
+
+    return book;
   }
 }

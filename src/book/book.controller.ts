@@ -14,6 +14,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { UserRole } from 'src/user/types/user-role.type';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('예매 정보')
 @Controller('books')
@@ -45,9 +46,17 @@ export class BookController {
    * @returns
    */
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.bookService.findAll();
+  async findAll(@Request() req) {
+    const userId = req.user.id;
+    const data = await this.bookService.findAll(userId);
+
+    return {
+      statusCode: HttpStatus.OK,
+      message: '예매 목록 조회에 성공했습니다.',
+      data,
+    };
   }
 
   /**
@@ -56,8 +65,10 @@ export class BookController {
    * @returns
    */
   @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.bookService.findOne(+id);
+  findOne(@Request() req, @Param('id') id: number) {
+    const userId = req.user.id;
+    return this.bookService.findOne(id, userId);
   }
 }
