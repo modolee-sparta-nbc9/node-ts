@@ -1,73 +1,45 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 스파르타 코딩클럽 Node.js 플러스주차 TypeScript 과제
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 환경변수
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+`.env` 파일 생성 후 아래 내용 입력
 
-## Description
+```
+SERVER_PORT=3000
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+DB_HOST=DB 주소
+DB_PORT=DB 포트번호
+DB_USERNAME=DB 사용자명
+DB_PASSWORD=DB 비밀번호
+DB_NAME=DB 이름
+DB_SYNC=Entity <-> DB Table 동기화 여부 (default: true)
 
-## Installation
-
-```bash
-$ npm install
+PASSWORD_HASH_ROUNDS=로그인 비밀번호 해시 생성 강도 (default: 10)
+JWT_SECRET=JWT 생성 및 검증 키
 ```
 
-## Running the app
+## 실행 방법
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```sh
+npm install
+npm run start:dev
 ```
 
-## Test
+## 설계 문서
 
-```bash
-# unit tests
-$ npm run test
+- ERD: https://drawsql.app/teams/team-modolee/diagrams/sparta-node-ts
 
-# e2e tests
-$ npm run test:e2e
+- API 명세서: https://modolee.notion.site/API-b5a7231578384dd09f335c9136e0a497
 
-# test coverage
-$ npm run test:cov
-```
+## Swagger 접속 주소
 
-## Support
+http://localhost:3000/api
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 참고 자료
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Nest.js 공식 문서: https://docs.nestjs.com
+- TypeORM 공식 문서: https://typeorm.io
+- Joi: https://www.npmjs.com/package/joi
+- Class Validator: https://www.npmjs.com/package/class-validator
+- Validator: https://www.npmjs.com/package/validator
+- Passport 공식 문서: https://www.passportjs.org/docs
