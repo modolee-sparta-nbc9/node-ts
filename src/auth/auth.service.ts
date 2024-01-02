@@ -3,7 +3,7 @@ import { SignUpDto } from './dtos/sign-up.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
-import { DEFAULT_CUSTOMER_POINT } from 'src/constants/point.costant';
+import { DEFAULT_CUSTOMER_POINT } from 'src/constants/point.constant';
 import { ConfigService } from '@nestjs/config';
 import bcrypt from 'bcrypt';
 import { SignInDto } from './dtos/sign-in.dto';

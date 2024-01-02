@@ -9,7 +9,7 @@ import {
 import { ShowCategory } from '../types/show-category.type';
 import { Schedule } from './schedule.entity';
 import { IsEnum, IsNotEmpty, IsNumber, IsString, Max } from 'class-validator';
-import { MAX_PRICE } from 'src/constants/point.costant';
+import { MAX_PRICE } from 'src/constants/point.constant';
 
 @Entity('shows')
 export class Show {
