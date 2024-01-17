@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ShowModule } from './show/show.module';
 import { BookModule } from './book/book.module';
+import { CardModule } from './card/card.module';
+import { ListModule } from './list/list.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { BookModule } from './book/book.module';
     UserModule,
     ShowModule,
     BookModule,
+    CardModule,
+    ListModule,
   ],
   controllers: [AppController],
 })
