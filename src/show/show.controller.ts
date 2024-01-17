@@ -30,23 +30,7 @@ export class ShowController {
   @Roles(UserRole.Admin)
   @UseGuards(RolesGuard)
   @Post()
-  async create(@Body() createShowDto: CreateShowDto): Promise<{
-    statusCode: HttpStatus;
-    message: string;
-    data: {
-      schedules: {
-        seat: { availableSeats: number; totalSeats: number };
-        date: Date;
-        time: string;
-      }[];
-      title: string;
-      description: string;
-      category: import('/Users/modolee/Dev/sparta/nbc9/commentary/sparta-node-ts/src/show/types/show-category.type').ShowCategory;
-      place: string;
-      price: number;
-      thumbnail: string;
-    } & import('/Users/modolee/Dev/sparta/nbc9/commentary/sparta-node-ts/src/show/entities/show.entity').Show;
-  }> {
+  async create(@Body() createShowDto: CreateShowDto) {
     const data = await this.showService.create(createShowDto);
 
     return {
