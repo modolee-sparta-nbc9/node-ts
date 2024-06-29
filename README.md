@@ -2,7 +2,11 @@
 
 ## 환경변수
 
-`.env` 파일 생성 후 아래 내용 입력
+`.env.example` 파일 복사하여 `.env` 파일 생성 후 아래 내용 입력
+
+```sh
+cp .env.example .env
+```
 
 ```
 SERVER_PORT=3000
@@ -19,6 +23,15 @@ JWT_SECRET=JWT 생성 및 검증 키
 ```
 
 ## 실행 방법
+
+- yarn
+
+```sh
+yarn
+yarn start:dev
+```
+
+- npm
 
 ```sh
 npm install
